@@ -1,0 +1,5 @@
+- add dependency information 
+- add version information 
+- consider Dockering 
+- relate plot to figure numbers of the publication
+- maybe add more functions to lib
