@@ -2,12 +2,26 @@ The MIT License (MIT)
 
 Copyright (c) 2017 Farshid Sepehrband
 
+NOTE: this repository is not approved for clinical use!
+NOTE: no warranty is supplied!
+
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
+
+To access data, permission is required: 
+1- for PNC raw data: follow the guidlines in 
+    http://www.med.upenn.edu/bbl/philadelphianeurodevelopmentalcohort.html
+2- for PING raw data: follow the guidlines in
+    http://pingstudy.ucsd.edu
+3- for processed data: contact Farshid Sepehrband when above permissions 
+are granted
+
+Upon the usage, the paper or the repository should be cited. 
+See citation information in the repository's home page.  
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
