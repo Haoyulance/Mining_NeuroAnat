@@ -15,10 +15,14 @@ submitted September 2017</span>.
 * Morphological features of the strucutral images were derived using [FreeSurfer](http://freesurfer.net) toolkit.  
 * FreeSurfer analysis was performed using [LONI pipeline](http://pipeline.loni.usc.edu) on high performance computing of <font color='red'>**USC**</font> Mark and Mary Stevens Neuroimaging and Informatics [Institute](http://www.ini.usc.edu), Keck school of Medicine of <font color='red'>**USC**</font>. The outputs were QC'ed and used as the input of this notebook. 
 
+
 **Data is available upon request and approval. See LICENSE for more information.**
 
 author:  
 Farshid Sepehrband,   
-*Laboratory of Neuro Imaging, USC Mark and Mary Stevens Neuroimaging and Informatics Institute, Keck School of Medicine of USC, University of Southern California, Los Angeles, CA, USA*
+*Laboratory of Neuro Imaging,
+Mark and Mary Stevens Neuroimaging and Informatics Institute, 
+Keck School of Medicine, 
+University of Southern California, Los Angeles, CA, USA*
 <farshid.sepehrband@loni.usc.edu>  
 @fsepehrband
