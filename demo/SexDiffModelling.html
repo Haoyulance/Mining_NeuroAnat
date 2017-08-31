@@ -1,0 +1,393 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Multivariate model of neuroanatomical sex difference, using SVM</title><meta name="generator" content="MATLAB 9.0"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-07-26"><meta name="DC.source" content="SexDiffModelling.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Multivariate model of neuroanatomical sex difference, using SVM</h1><!--introduction--><p>This demo accompanies&nbsp;below paper: XXX</p><p>This demo includes:</p><div><ul><li>Building a model on the FreeSurfer outputs of morphological analysis on PNC data</li></ul></div><div><ul><li>Testing the model on an independent dataset (PING)</li></ul></div><p>For FreeSurfer toolkit see: <a href="http://freesurfer.net">http://freesurfer.net</a></p><p>FreeSurfer analysis was performed using LONI pipeline: <a href="http://pipeline.loni.usc.edu">http://pipeline.loni.usc.edu</a></p><p>Info about PNC study can be found: <a href="http://www.med.upenn.edu/bbl/philadelphianeurodevelopmentalcohort.html">http://www.med.upenn.edu/bbl/philadelphianeurodevelopmentalcohort.html</a></p><p>Info about PNC study can be found: <a href="http://pingstudy.ucsd.edu">http://pingstudy.ucsd.edu</a></p><pre>Author: Farshid Sepehrband
+@fsepehrband
+Email: farshid.sepehrband@loni.usc.edu</pre><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Initiate</a></li><li><a href="#2">Read FreeSurfer's output</a></li><li><a href="#3">Obtain indices of Destrieux atlas for neuroanatomical features of interest</a></li><li><a href="#4">Build the SVM model on neuroanatomical data of PNC subjects</a></li><li><a href="#5">predict sex of PING subject's with this model</a></li><li><a href="#6">Compare prediction accuracy of the model with gold standard and baseline models</a></li><li><a href="#7">Plot neuroanatomical features, ranked based on their SVM beta weight</a></li></ul></div><h2>Initiate<a name="1"></a></h2><pre class="codeinput">clear <span class="string">all</span>;clc;close <span class="string">all</span>
+
+<span class="comment">% add repository path</span>
+Repo = <span class="string">'/Volumes/candl/farshid/BDDS/PNC/BDDS_AnatSexDiff'</span>;
+addpath(genpath(Repo));
+cd(Repo)
+</pre><h2>Read FreeSurfer's output<a name="2"></a></h2><p>read FreeSurfer outputs of the PNC dataset</p><pre class="codeinput">x_pnc = table2array(readtable(<span class="string">'data/pnc_fs.csv'</span>));
+
+<span class="comment">% read FreeSurfer outputs of the PING dataset</span>
+x_ping = table2array(readtable(<span class="string">'data/ping_fs.csv'</span>));
+
+<span class="comment">% read feature names</span>
+load(<span class="string">'data/fsNames.mat'</span>);
+</pre><h2>Obtain indices of Destrieux atlas for neuroanatomical features of interest<a name="3"></a></h2><p>Destreiux atlas and four neuroanatomical features were selected based on initial analysis of the PNC data (See above paper for more detail).</p><pre class="codeinput">indFS = false(size(x_pnc,2),1);
+<span class="keyword">for</span> i = 1:size(anatNames,2)
+    <span class="keyword">if</span> ~isempty(findstr(anatNames{i},<span class="string">':FS_aparc_2009:'</span>)) <span class="keyword">...</span>
+            &amp;&amp; (~isempty(findstr(anatNames{i},<span class="string">'thickness:'</span>)) <span class="keyword">...</span>
+            || ~isempty(findstr(anatNames{i},<span class="string">'volume'</span>)) <span class="keyword">...</span>
+            || ~isempty(findstr(anatNames{i},<span class="string">'meancurv'</span>)) <span class="keyword">...</span>
+            || ~isempty(findstr(anatNames{i},<span class="string">'area'</span>)) )
+        indFS(i) = true;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+new_names = anatNames(indFS(1:end-1));
+
+<span class="comment">% add age to feature matrix</span>
+indFS(end-1)=1;
+</pre><h2>Build the SVM model on neuroanatomical data of PNC subjects<a name="4"></a></h2><pre class="codeinput"><span class="comment">% k-fold cross-validation (k=5)</span>
+<span class="comment">% with 100 permutation</span>
+kFoldval = 5;
+NumPermut = 100;
+
+<span class="comment">% train the SVM model</span>
+inputMatrix = [x_pnc(:,indFS) x_pnc(:,end)];
+
+<span class="comment">% see SexDiff_SVM function for details of classification</span>
+[Xroc,Yroc,VA,AUC,OptROC,pnc_classifier] = <span class="keyword">...</span>
+    SexDiff_SVM(inputMatrix,kFoldval,NumPermut,new_names);
+
+<span class="comment">% plot the ROC curve of trained model</span>
+figure(1)
+plot([0 1],[0 1],<span class="string">'r'</span>,<span class="string">'LineWidth'</span>,2); grid <span class="string">on</span>
+hold <span class="string">on</span>
+plot(mean(Xroc,2),mean(Yroc,2),<span class="string">'LineWidth'</span>,2)
+set(gca,<span class="string">'xtick'</span>,0:0.25:1)
+set(gca,<span class="string">'ytick'</span>,0:0.25:1)
+xlabel(<span class="string">'False positive rate'</span>)
+ylabel(<span class="string">'True positive rate'</span>)
+title(<span class="string">'ROC of SexDiff Model'</span>)
+legend(<span class="string">'Chance'</span>,<span class="string">'SVM model'</span>,<span class="string">'Location'</span>,<span class="string">'SouthEast'</span>)
+
+set(gca,<span class="string">'LineWidth'</span>,1,<span class="string">'FontSize'</span>,12,<span class="string">'FontName'</span>,<span class="string">'Arial'</span>);
+set(gcf, <span class="string">'PaperUnits'</span>, <span class="string">'centimeters'</span>);
+set(gcf, <span class="string">'PaperPosition'</span>, [0 0 6 6]);
+</pre><img vspace="5" hspace="5" src="SexDiffModelling_01.png" style="width:560px;height:420px;" alt=""> <h2>predict sex of PING subject's with this model<a name="5"></a></h2><pre class="codeinput"><span class="comment">% separate labels for testing</span>
+features_ping = x_ping(:,indFS);
+labels_ping   = x_ping(:,end);
+
+<span class="comment">% for each permutation, perform prediction and evaluate</span>
+predSex = nan(size(x_ping,1),NumPermut); <span class="comment">% to store predicted value</span>
+PA_ping = nan(1,NumPermut);              <span class="comment">% to store prediction accuracy</span>
+
+<span class="keyword">for</span> i = 1:NumPermut
+    <span class="comment">% predict</span>
+    Classifier = pnc_classifier(i).ClassificationSVM;
+    predSex(:,i) = Classifier.predict(features_ping);
+
+    <span class="comment">% measure prediction accuarcy (mean absolute error)</span>
+    PA_ping(i) = sum(abs(predSex(:,i)-labels_ping)==0)/length(labels_ping);
+
+    <span class="comment">% derive other classification performance measures (e.g. confusion matrix)</span>
+    CP(i) = classperf(labels_ping,predSex(:,i));
+<span class="keyword">end</span>
+
+<span class="keyword">for</span> i = 1:NumPermut
+    mCP(1,i) = CP(i).DiagnosticTable(1,1);
+    mCP(2,i) = CP(i).DiagnosticTable(1,2);
+    mCP(3,i) = CP(i).DiagnosticTable(2,1);
+    mCP(4,i) = CP(i).DiagnosticTable(2,2);
+<span class="keyword">end</span>
+ConfMatrix = reshape(mean(mCP,2),2,2);
+ConfMatrix = array2table(ConfMatrix);
+ConfMatrix.Properties.RowNames={<span class="string">'female'</span>,<span class="string">'male'</span>};
+ConfMatrix.Properties.VariableNames={<span class="string">'predicted_female'</span>,<span class="string">'predicted_male'</span>};
+
+fprintf(<span class="string">'Prediction accuracy = %0.1f (%%) \n'</span>, mean(PA_ping)*100)
+ConfMatrix
+</pre><pre class="codeoutput">Prediction accuracy = 77.1 (%) 
+
+ConfMatrix = 
+
+              predicted_female    predicted_male
+              ________________    ______________
+
+    female    290.99              69.01         
+    male        87.3              234.7         
+
+</pre><h2>Compare prediction accuracy of the model with gold standard and baseline models<a name="6"></a></h2><p>gold standard: a model that is built on same FreeSurfer data of PING subjects baseline: a model that is built only on eTIV of PING subjects</p><pre class="codeinput">ping_fs = [x_ping(:,indFS) x_ping(:,end)];
+[~,~,VA_ping,AUC_ping,~,~] = <span class="keyword">...</span>
+    SexDiff_SVM(ping_fs,kFoldval,NumPermut,new_names);
+
+ping_eTIV = [x_ping(:,end-2:end)];
+[~,~,VA_ping_eTIV,AUC_ping_eTIV,~,~] = <span class="keyword">...</span>
+    SexDiff_SVM(ping_eTIV,kFoldval,NumPermut);
+
+<span class="comment">% compare accuracies</span>
+figure(2)
+modelComp = [VA_ping' VA_ping_eTIV'];
+hold <span class="string">on</span>
+bar(1,mean(PA_ping),0.5,<span class="string">'FaceColor'</span>,[.42 .42 .52],<span class="string">'LineWidth'</span>,2)
+bar([2 3],mean(modelComp),0.5,<span class="string">'FaceColor'</span>,[.65 .81 .94],<span class="string">'LineWidth'</span>,2)
+errorbar(1,mean(PA_ping),std(PA_ping),<span class="string">'k.'</span>,<span class="string">'LineWidth'</span>,2)
+errorbar([2 3],mean(modelComp),std(modelComp),<span class="string">'k.'</span>,<span class="string">'LineWidth'</span>,2)
+ylim([.6 .9])
+ylabel(<span class="string">'score (%)'</span>)
+legend(<span class="string">'prediction accuracy'</span>,<span class="string">'cross-validation accuracy'</span>)
+set(gca,<span class="string">'xtick'</span>,1:3,<span class="string">'xtickLabels'</span>,{<span class="string">'SexDiff model'</span>,<span class="string">'gold standard'</span>,<span class="string">'baseline'</span>})
+grid <span class="string">on</span>
+
+set(gca,<span class="string">'LineWidth'</span>,1,<span class="string">'FontSize'</span>,12,<span class="string">'FontName'</span>,<span class="string">'Arial'</span>);
+set(gcf, <span class="string">'PaperUnits'</span>, <span class="string">'centimeters'</span>);
+set(gcf, <span class="string">'PaperPosition'</span>, [0 0 8 6]);
+</pre><img vspace="5" hspace="5" src="SexDiffModelling_02.png" style="width:560px;height:420px;" alt=""> <h2>Plot neuroanatomical features, ranked based on their SVM beta weight<a name="7"></a></h2><pre class="codeinput"><span class="keyword">for</span> i = 1:NumPermut
+    WW(:,i) = pnc_classifier(i).ClassificationSVM.Beta(1:end-1);
+<span class="keyword">end</span>
+Weights_new = mean(WW,2);
+[inda,indb]     = sort(abs(Weights_new),<span class="string">'descend'</span>);
+Weights_ordered = Weights_new(indb);
+ordered_names   = new_names(indb);
+
+figure(3)
+stem(Weights_ordered(1:30),<span class="string">'fill'</span>,<span class="string">'LineStyle'</span>,<span class="string">'none'</span>,<span class="string">'MarkerSize'</span>,6)
+set(gca,<span class="string">'xtick'</span>,1:30,<span class="keyword">...</span>
+    <span class="string">'xtickLabels'</span>,ordered_names(1:30),<span class="string">'TickLabelInterpreter'</span>,<span class="string">'none'</span>);
+set(gca,<span class="string">'ytick'</span>,-2:2,<span class="string">'ytickLabels'</span>,-2:2);
+box <span class="string">off</span>
+set(gca,<span class="string">'xgrid'</span>,<span class="string">'on'</span>)
+ylim([-2.2 2.2])
+xlim([0 31])
+camroll(-90)
+</pre><img vspace="5" hspace="5" src="SexDiffModelling_03.png" style="width:560px;height:420px;" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Multivariate model of neuroanatomical sex difference, using SVM
+% This demo accompanies below paper:
+% XXX 
+%
+% This demo includes:
+%
+% * Building a model on the FreeSurfer outputs of morphological analysis on PNC data
+%
+% * Testing the model on an independent dataset (PING)
+% 
+% For FreeSurfer toolkit see: 
+% <http://freesurfer.net>
+%
+% FreeSurfer analysis was performed using LONI pipeline:
+% <http://pipeline.loni.usc.edu>
+%
+% Info about PNC study can be found:
+% <http://www.med.upenn.edu/bbl/philadelphianeurodevelopmentalcohort.html>
+%
+% Info about PNC study can be found: 
+% <http://pingstudy.ucsd.edu>
+%
+%  Author: Farshid Sepehrband  
+%  @fsepehrband  
+%  Email: farshid.sepehrband@loni.usc.edu  
+
+%% Initiate
+clear all;clc;close all
+
+% add repository path
+Repo = '/Volumes/candl/farshid/BDDS/PNC/BDDS_AnatSexDiff';
+addpath(genpath(Repo));
+cd(Repo)
+
+%% Read FreeSurfer's output
+% read FreeSurfer outputs of the PNC dataset
+x_pnc = table2array(readtable('data/pnc_fs.csv'));
+
+% read FreeSurfer outputs of the PING dataset
+x_ping = table2array(readtable('data/ping_fs.csv'));
+
+% read feature names
+load('data/fsNames.mat');
+
+%% Obtain indices of Destrieux atlas for neuroanatomical features of interest 
+% Destreiux atlas and four neuroanatomical features were selected based on
+% initial analysis of the PNC data (See above paper for more detail).
+
+indFS = false(size(x_pnc,2),1);
+for i = 1:size(anatNames,2)
+    if ~isempty(findstr(anatNames{i},':FS_aparc_2009:')) ...
+            && (~isempty(findstr(anatNames{i},'thickness:')) ...
+            || ~isempty(findstr(anatNames{i},'volume')) ...
+            || ~isempty(findstr(anatNames{i},'meancurv')) ...
+            || ~isempty(findstr(anatNames{i},'area')) )
+        indFS(i) = true;
+    end
+end
+new_names = anatNames(indFS(1:end-1));
+
+% add age to feature matrix 
+indFS(end-1)=1; 
+
+%% Build the SVM model on neuroanatomical data of PNC subjects
+
+% k-fold cross-validation (k=5)
+% with 100 permutation 
+kFoldval = 5;
+NumPermut = 100;
+
+% train the SVM model 
+inputMatrix = [x_pnc(:,indFS) x_pnc(:,end)];
+
+% see SexDiff_SVM function for details of classification
+[Xroc,Yroc,VA,AUC,OptROC,pnc_classifier] = ...
+    SexDiff_SVM(inputMatrix,kFoldval,NumPermut,new_names);
+
+% plot the ROC curve of trained model
+figure(1)
+plot([0 1],[0 1],'r','LineWidth',2); grid on
+hold on
+plot(mean(Xroc,2),mean(Yroc,2),'LineWidth',2)
+set(gca,'xtick',0:0.25:1)
+set(gca,'ytick',0:0.25:1)
+xlabel('False positive rate')
+ylabel('True positive rate')
+title('ROC of SexDiff Model')
+legend('Chance','SVM model','Location','SouthEast')
+
+set(gca,'LineWidth',1,'FontSize',12,'FontName','Arial');
+set(gcf, 'PaperUnits', 'centimeters');
+set(gcf, 'PaperPosition', [0 0 6 6]);
+
+%% predict sex of PING subject's with this model
+
+% separate labels for testing 
+features_ping = x_ping(:,indFS); 
+labels_ping   = x_ping(:,end);
+
+% for each permutation, perform prediction and evaluate
+predSex = nan(size(x_ping,1),NumPermut); % to store predicted value
+PA_ping = nan(1,NumPermut);              % to store prediction accuracy
+
+for i = 1:NumPermut
+    % predict
+    Classifier = pnc_classifier(i).ClassificationSVM;
+    predSex(:,i) = Classifier.predict(features_ping);
+    
+    % measure prediction accuarcy (mean absolute error)
+    PA_ping(i) = sum(abs(predSex(:,i)-labels_ping)==0)/length(labels_ping);
+    
+    % derive other classification performance measures (e.g. confusion matrix)
+    CP(i) = classperf(labels_ping,predSex(:,i));
+end
+
+for i = 1:NumPermut
+    mCP(1,i) = CP(i).DiagnosticTable(1,1);
+    mCP(2,i) = CP(i).DiagnosticTable(1,2);
+    mCP(3,i) = CP(i).DiagnosticTable(2,1);
+    mCP(4,i) = CP(i).DiagnosticTable(2,2);
+end
+ConfMatrix = reshape(mean(mCP,2),2,2);
+ConfMatrix = array2table(ConfMatrix);
+ConfMatrix.Properties.RowNames={'female','male'};
+ConfMatrix.Properties.VariableNames={'predicted_female','predicted_male'};
+
+fprintf('Prediction accuracy = %0.1f (%%) \n', mean(PA_ping)*100)
+ConfMatrix
+
+%% Compare prediction accuracy of the model with gold standard and baseline models
+% gold standard: a model that is built on same FreeSurfer data of PING
+% subjects
+% baseline: a model that is built only on eTIV of PING subjects 
+
+ping_fs = [x_ping(:,indFS) x_ping(:,end)];
+[~,~,VA_ping,AUC_ping,~,~] = ...
+    SexDiff_SVM(ping_fs,kFoldval,NumPermut,new_names);
+
+ping_eTIV = [x_ping(:,end-2:end)];
+[~,~,VA_ping_eTIV,AUC_ping_eTIV,~,~] = ...
+    SexDiff_SVM(ping_eTIV,kFoldval,NumPermut);
+
+% compare accuracies 
+figure(2) 
+modelComp = [VA_ping' VA_ping_eTIV'];
+hold on
+bar(1,mean(PA_ping),0.5,'FaceColor',[.42 .42 .52],'LineWidth',2)
+bar([2 3],mean(modelComp),0.5,'FaceColor',[.65 .81 .94],'LineWidth',2)
+errorbar(1,mean(PA_ping),std(PA_ping),'k.','LineWidth',2)
+errorbar([2 3],mean(modelComp),std(modelComp),'k.','LineWidth',2)
+ylim([.6 .9])
+ylabel('score (%)')
+legend('prediction accuracy','cross-validation accuracy')
+set(gca,'xtick',1:3,'xtickLabels',{'SexDiff model','gold standard','baseline'})
+grid on
+
+set(gca,'LineWidth',1,'FontSize',12,'FontName','Arial');
+set(gcf, 'PaperUnits', 'centimeters');
+set(gcf, 'PaperPosition', [0 0 8 6]);
+
+%% Plot neuroanatomical features, ranked based on their SVM beta weight
+for i = 1:NumPermut
+    WW(:,i) = pnc_classifier(i).ClassificationSVM.Beta(1:end-1);
+end
+Weights_new = mean(WW,2);
+[inda,indb]     = sort(abs(Weights_new),'descend');
+Weights_ordered = Weights_new(indb);
+ordered_names   = new_names(indb);
+
+figure(3)
+stem(Weights_ordered(1:30),'fill','LineStyle','none','MarkerSize',6)
+set(gca,'xtick',1:30,...
+    'xtickLabels',ordered_names(1:30),'TickLabelInterpreter','none');
+set(gca,'ytick',-2:2,'ytickLabels',-2:2);
+box off
+set(gca,'xgrid','on')
+ylim([-2.2 2.2])
+xlim([0 31])
+camroll(-90)
+##### SOURCE END #####
+--></body></html>
