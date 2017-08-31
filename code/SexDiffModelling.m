@@ -1,6 +1,11 @@
 %% Multivariate model of neuroanatomical sex difference, using SVM
 % This demo accompanies below paper:
-% XXX 
+% F. Sepehrband*, K. M. Lynch, R. P. Cabeen, C. Gonzalez-Zacarias, L. Zhao,
+% M. D'Arcy, C. Kesselman, M. M. Herting, I. D. Dinov, A. W. Toga, K. A.
+% Clark,  
+% "Neuroanatomical Morphometric Characterization of Sex Differences in
+% Youth Using Multivariate Statistical Learning",  
+% NeuroImage, submitted
 %
 % This demo includes:
 %
@@ -21,26 +26,26 @@
 % <http://pingstudy.ucsd.edu>
 %
 %  Author: Farshid Sepehrband  
-%  @fsepehrband  
 %  Email: farshid.sepehrband@loni.usc.edu  
+%  @fsepehrband 
 
 %% Initiate
 clear all;clc;close all
 
 % add repository path
-Repo = '/Volumes/candl/farshid/BDDS/PNC/BDDS_SexDiff';
+Repo = '/Users/Farshid/Dropbox/Research/Codes/GitHub/NeuroAnat_SexDiff';
 addpath(genpath(Repo));
 cd(Repo)
 
 %% Read FreeSurfer's output
 % read FreeSurfer outputs of the PNC dataset
-x_pnc = table2array(readtable('data/pnc_fs.csv'));
+x_pnc = table2array(readtable('../NeuroAnat_SexDiff_data/pnc_fs.csv'));
 
 % read FreeSurfer outputs of the PING dataset
-x_ping = table2array(readtable('data/ping_fs.csv'));
+x_ping = table2array(readtable('../NeuroAnat_SexDiff_data/ping_fs.csv'));
 
 % read feature names
-load('data/fsNames.mat');
+load('../NeuroAnat_SexDiff_data/fsNames.mat');
 
 %% Obtain indices of Destrieux atlas for neuroanatomical features of interest 
 % Destreiux atlas and four neuroanatomical features were selected based on
