@@ -2,4 +2,5 @@
 - add version information 
 - consider Dockering 
 - relate plot to figure numbers of the publication
+- improve LONI logo/tag and Open Source logo (open source tag is not classy)
 - maybe add more functions to lib
