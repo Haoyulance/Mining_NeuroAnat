@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/102077048.svg)](https://zenodo.org/badge/latestdoi/102077048)
+[![DOI](https://zenodo.org/badge/102077048.svg)](https://zenodo.org/badge/latestdoi/102077048) 
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.png?v=103)](https://osf.io/yp4qg/)
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.png?v=103)](https://github.com/sepehrband/Mining_NeuroAnat/blob/master/LICENSE)
 [![LONI](https://github.com/sepehrband/Mining_NeuroAnat/blob/master/files/loni.png)](http://loni.usc.edu)
