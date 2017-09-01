@@ -23,6 +23,6 @@ Farshid Sepehrband,
 *Laboratory of Neuro Imaging,  
 Mark and Mary Stevens Neuroimaging and Informatics Institute,  
 Keck School of Medicine,  
-University of Southern California, Los Angeles, CA, USA*
+University of Southern California, Los Angeles, CA, USA*  
 <farshid.sepehrband@loni.usc.edu>  
 @fsepehrband
