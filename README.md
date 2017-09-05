@@ -35,6 +35,7 @@ submitted September 2017</span>.
 * FreeSurfer analysis was performed using [LONI pipeline](http://pipeline.loni.usc.edu) on high performance computing of <font color='red'>**USC**</font> Mark and Mary Stevens Neuroimaging and Informatics [Institute](http://www.ini.usc.edu), Keck school of Medicine of <font color='red'>**USC**</font>. The outputs were QC'ed and used in this study.  
 * **Data is available upon request and approval. See LICENSE for more information.**
 
+__________________________________________________________________
 author:  
 Farshid Sepehrband,   
 *Laboratory of Neuro Imaging,  
@@ -43,3 +44,4 @@ Keck School of Medicine,
 University of Southern California, Los Angeles, CA, USA*  
 <farshid.sepehrband@loni.usc.edu>  
 @fsepehrband
+
