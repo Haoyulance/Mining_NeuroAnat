@@ -11,17 +11,29 @@ This repository accompanies below paper:
 *NeuroImage*,   
 submitted September 2017</span>.
 
-## Codes
+## Source codes
 * `NeuroAnat_SexDiff/code` contains source codes
 * `NeuroAnat_SexDiff/demo` contains .html files of the same codes (compiled and static presentation)
 
-## Data and analysis
+## Source codes include:
+* Explatory analysis
+* Linear regression
+  * Ordinary least square implementation
+  * Robust linear modeling with Huber's loss function using least trimmed squares estimator
+* Non-parameteric correlation analysis
+  * Spearman's rank correlation 
+* Multivariate logistic regression
+* Statistical learning
+  * Support vector machine
+* Inferential analysis
+  * Mapping between-group differences
+  * Plotting statistical summeries 
+
+## Raw data and preparation
 * Strucutral MRI of the [PNC study](http://www.med.upenn.edu/bbl/philadelphianeurodevelopmentalcohort.html ) were used for this study.  
 * Morphological features of the strucutral images were derived using [FreeSurfer](http://freesurfer.net) toolkit.  
-* FreeSurfer analysis was performed using [LONI pipeline](http://pipeline.loni.usc.edu) on high performance computing of <font color='red'>**USC**</font> Mark and Mary Stevens Neuroimaging and Informatics [Institute](http://www.ini.usc.edu), Keck school of Medicine of <font color='red'>**USC**</font>. The outputs were QC'ed and used in this study. 
-
-
-#### Data is available upon request and approval. See LICENSE for more information.
+* FreeSurfer analysis was performed using [LONI pipeline](http://pipeline.loni.usc.edu) on high performance computing of <font color='red'>**USC**</font> Mark and Mary Stevens Neuroimaging and Informatics [Institute](http://www.ini.usc.edu), Keck school of Medicine of <font color='red'>**USC**</font>. The outputs were QC'ed and used in this study.  
+* **Data is available upon request and approval. See LICENSE for more information.**
 
 author:  
 Farshid Sepehrband,   
