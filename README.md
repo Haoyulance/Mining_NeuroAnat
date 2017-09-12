@@ -1,5 +1,5 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.878944.svg)](https://doi.org/10.5281/zenodo.878944) 
-[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.png?v=103)]
+![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.png?v=103)
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.png?v=103)](https://github.com/sepehrband/Mining_NeuroAnat/blob/master/LICENSE)
 [![LONI](https://github.com/sepehrband/Mining_NeuroAnat/blob/master/files/loni.png)](http://loni.usc.edu)
 
