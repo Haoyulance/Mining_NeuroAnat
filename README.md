@@ -6,10 +6,9 @@
 # Neuroanatomical Morphometric Characterization of Sex Differences
 This repository accompanies below paper: 
 
-><span style="color:gray">F. Sepehrband, K.M. Lynch, R.P. Cabeen, C. Gonzalez-Zacarias, L. Zhao, M. D'Arcy, C. Kesselman, M.M. Herting, I.D. Dinov, A.W. Toga, K.A. Clark,   
-**Neuroanatomical Morphometric Characterization of Sex Differences in Youth Using Multivariate Statistical Learning**,  
-*NeuroImage*,   
-submitted September 2017</span>.
+><span style="color:gray">Sepehrband, F., Lynch, K.M., Cabeen, R.P., González-Zacarías, C., Zhao, L., D’Arcy, M., Kesselman, C., Herting, M.M., Dinov, I.D., Toga, A.W., Clark, K.A., 2018   
+**Neuroanatomical Morphometric Characterization of Sex Differences in Youth Using Multivariate Statistical Learning**  
+NeuroImage, 172:217–227. [https://doi.org/10.1016/j.neuroimage.2018.01.065](https://doi.org/10.1016/j.neuroimage.2018.01.065)</span>.
 
 ## Source codes
 * `NeuroAnat_SexDiff/code` contains source codes
