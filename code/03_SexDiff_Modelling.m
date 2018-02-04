@@ -1,11 +1,6 @@
 %% Multivariate model of neuroanatomical sex difference, using SVM
-% This demo accompanies below paper:
-% F. Sepehrband*, K. M. Lynch, R. P. Cabeen, C. Gonzalez-Zacarias, L. Zhao,
-% M. D'Arcy, C. Kesselman, M. M. Herting, I. D. Dinov, A. W. Toga, K. A.
-% Clark,  
-% "Neuroanatomical Morphometric Characterization of Sex Differences in
-% Youth Using Multivariate Statistical Learning",  
-% NeuroImage, submitted
+% This demo accompaniesÂ below paper:
+% https://doi.org/10.1016/j.neuroimage.2018.01.065
 %
 % This demo includes:
 %
